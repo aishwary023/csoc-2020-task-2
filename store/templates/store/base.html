@@ -9,23 +9,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
   <style>
-      .column{
+      #nav{
           border: 2px solid #cccc;
-          margin: 1vw;
+          margin:20px;
           padding: 20px;
-          box-shadow:5px 5px #eeee;
-          width: 16vw;
-          
+          box-shadow:5px 5px #eeee;         
       }
-      .c{
-          width: 80vw;
-         
-        border: 2px solid #cccc;
-          margin: 1vw;
-          padding: 20px;
-          box-shadow:5px 5px #eeee;
-          
-      }
+      
   </style>
   {% load static %}
 </head>
@@ -34,8 +24,8 @@
 
     <div class="container-fluid">
 
-        <div class="row" style="height: 100vh;">
-        <div class="column">
+        <div class="row">
+        <div class="col-sm-2" id="nav">
         {% block sidebar %}
         <ul class="sidebar-nav">
             <li><a href="{% url 'index' %}">Home</a></li>
@@ -56,7 +46,7 @@
         
         {% endblock %}
         </div>
-        <div class="c ">
+        <div class="col-sm-8" style="margin-top: 20px;">
         {% block content %}{% endblock %}  
         
         </div>
