@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+
 
 class Book(models.Model):
     title = models.CharField(max_length=50)
@@ -16,6 +16,14 @@ class Book(models.Model):
     def __str__(self):
         return f'{self.title} by {self.author}'
 
+
+class UserRating(models.Model):
+    user=models.ForeignKey(User, related_name='user', null=True, blank=True, on_delete=models.SET_NULL)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rating = models.FloatField(default=0)
+    
+    def __str__(self):
+            return f'{self.book.title}'
 
 class BookCopy(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
