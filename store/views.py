@@ -20,7 +20,7 @@ def bookDetailView(request, bid):
     }   
     
     book = get_object_or_404(Book,pk=bid)
-    bookcopy = get_list_or_404(BookCopy, book=bid, status=False)
+    bookcopy = get_list_or_404(BookCopy, book=bid, status=True)
 
     context['book']=book
     context['num_available']=len(bookcopy)
@@ -65,26 +65,20 @@ def loanBookView(request):
         bid = data.get('bid','')
     book_id = bid 
 
-    bookcopy = BookCopy.objects.filter(book=book_id,status=False)
+    bookcopy = BookCopy.objects.filter(book=book_id,status=True)
 
     if len(bookcopy)==0:
         response_data['message'] = 'failure'
     else:    
         bookcopy[0].borrower = request.user
         bookcopy[0].borrow_date = date.today()
-        bookcopy[0].status = True
+        bookcopy[0].status = False
         bookcopy[0].save()
         response_data['message'] = 'success'
 
     return JsonResponse(response_data)
 
-'''
-FILL IN THE BELOW VIEW BY YOURSELF.
-This view will return the issued book.
-You need to accept the book id as argument from a post request.
-You additionally need to complete the returnBook function in the loaned_books.html file
-to make this feature complete
-''' 
+
 @csrf_exempt
 @login_required
 def returnBookView(request):
