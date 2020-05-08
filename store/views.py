@@ -99,7 +99,7 @@ def returnBookView(request):
     else:    
         bookcopy[0].borrower = None
         bookcopy[0].borrow_date = None
-        bookcopy[0].status = False
+        bookcopy[0].status = True
         bookcopy[0].save()
         response_data['message'] = 'success'
 
